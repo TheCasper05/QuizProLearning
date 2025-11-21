@@ -1,0 +1,653 @@
+[
+  {
+    "quizId": "quiz-ciencias-01",
+    "title": "Animales del Mundo",
+    "description": "¿Cuánto sabes sobre los animales?",
+    "category": "Ciencias",
+    "level": "Fácil",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuál es el animal terrestre más grande del mundo?",
+        "type": "multiple",
+        "options": ["Elefante africano", "Rinoceronte", "Jirafa", "Hipopótamo"],
+        "correctAnswer": 0,
+        "points": 10,
+        "explanation": "El elefante africano es el animal terrestre más grande, puede pesar hasta 6 toneladas."
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Qué animal es conocido por cambiar de color?",
+        "type": "multiple",
+        "options": ["Serpiente", "Camaleón", "Lagartija", "Rana"],
+        "correctAnswer": 1,
+        "points": 10,
+        "explanation": "Los camaleones pueden cambiar de color para camuflarse o comunicarse."
+      },
+      {
+        "questionId": "q3",
+        "question": "¿Las ballenas son mamíferos?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10,
+        "explanation": "Sí, las ballenas son mamíferos marinos que respiran aire."
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Cuántos corazones tiene un pulpo?",
+        "type": "multiple",
+        "options": ["1", "2", "3", "4"],
+        "correctAnswer": 2,
+        "points": 10,
+        "explanation": "Los pulpos tienen 3 corazones: dos bombean sangre a las branquias y uno al resto del cuerpo."
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Qué animal es el más rápido del mundo?",
+        "type": "multiple",
+        "options": ["León", "Guepardo", "Caballo", "Águila"],
+        "correctAnswer": 1,
+        "points": 10,
+        "explanation": "El guepardo puede alcanzar velocidades de hasta 120 km/h."
+      }
+    ],
+    "stats": {
+      "totalAttempts": 42,
+      "totalCompletions": 38,
+      "averageScore": 85.5,
+      "averageRating": 4.5,
+      "totalRatings": 15
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-matematicas-01",
+    "title": "Matemáticas Básicas",
+    "description": "Practica operaciones matemáticas básicas",
+    "category": "Matemáticas",
+    "level": "Fácil",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuánto es 12 + 8?",
+        "type": "multiple",
+        "options": ["18", "20", "22", "24"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Cuánto es 15 × 3?",
+        "type": "multiple",
+        "options": ["35", "40", "45", "50"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿Cuánto es 100 ÷ 4?",
+        "type": "multiple",
+        "options": ["20", "25", "30", "35"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿50 es un número par?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuántos lados tiene un hexágono?",
+        "type": "multiple",
+        "options": ["4", "5", "6", "7"],
+        "correctAnswer": 2,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 67,
+      "totalCompletions": 63,
+      "averageScore": 92.3,
+      "averageRating": 4.7,
+      "totalRatings": 22
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-historia-01",
+    "title": "Historia Mundial",
+    "description": "Eventos importantes de la historia",
+    "category": "Historia",
+    "level": "Intermedio",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿En qué año llegó Cristóbal Colón a América?",
+        "type": "multiple",
+        "options": ["1492", "1500", "1520", "1450"],
+        "correctAnswer": 0,
+        "points": 10,
+        "explanation": "Cristóbal Colón llegó a América el 12 de octubre de 1492."
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Quién pintó la Mona Lisa?",
+        "type": "multiple",
+        "options": ["Michelangelo", "Leonardo da Vinci", "Rafael", "Donatello"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿La Segunda Guerra Mundial terminó en 1945?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Cuál fue la capital del Imperio Romano?",
+        "type": "multiple",
+        "options": ["Atenas", "Roma", "Constantinopla", "Alejandría"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿En qué siglo vivió Napoleón Bonaparte?",
+        "type": "multiple",
+        "options": ["Siglo XVII", "Siglo XVIII", "Siglo XIX", "Siglo XX"],
+        "correctAnswer": 2,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 31,
+      "totalCompletions": 28,
+      "averageScore": 76.8,
+      "averageRating": 4.3,
+      "totalRatings": 12
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-geografia-01",
+    "title": "Capitales del Mundo",
+    "description": "¿Conoces las capitales de estos países?",
+    "category": "Geografía",
+    "level": "Intermedio",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuál es la capital de Francia?",
+        "type": "multiple",
+        "options": ["Londres", "París", "Berlín", "Madrid"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Cuál es la capital de Japón?",
+        "type": "multiple",
+        "options": ["Pekín", "Seúl", "Tokio", "Bangkok"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿La capital de Brasil es Río de Janeiro?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 1,
+        "points": 10,
+        "explanation": "La capital de Brasil es Brasilia, no Río de Janeiro."
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Cuál es la capital de Australia?",
+        "type": "multiple",
+        "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuál es la capital de Egipto?",
+        "type": "multiple",
+        "options": ["El Cairo", "Alejandría", "Luxor", "Asuán"],
+        "correctAnswer": 0,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 45,
+      "totalCompletions": 41,
+      "averageScore": 81.2,
+      "averageRating": 4.4,
+      "totalRatings": 18
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-tecnologia-01",
+    "title": "Tecnología Moderna",
+    "description": "Descubre cuánto sabes de tecnología",
+    "category": "Tecnología",
+    "level": "Intermedio",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Qué significa 'HTML'?",
+        "type": "multiple",
+        "options": [
+          "HyperText Markup Language",
+          "High Tech Modern Language",
+          "Home Tool Markup Language",
+          "Hyperlinks and Text Markup Language"
+        ],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Quién fundó Microsoft?",
+        "type": "multiple",
+        "options": ["Steve Jobs", "Bill Gates", "Mark Zuckerberg", "Elon Musk"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿El primer iPhone fue lanzado en 2007?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Qué es un 'bug' en programación?",
+        "type": "multiple",
+        "options": ["Un virus", "Un error en el código", "Un tipo de computadora", "Una función"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuál es el lenguaje de programación más usado en 2024?",
+        "type": "multiple",
+        "options": ["Python", "Java", "C++", "Ruby"],
+        "correctAnswer": 0,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 56,
+      "totalCompletions": 52,
+      "averageScore": 78.9,
+      "averageRating": 4.6,
+      "totalRatings": 20
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-deportes-01",
+    "title": "Deportes Populares",
+    "description": "Todo sobre los deportes más famosos",
+    "category": "Deportes",
+    "level": "Fácil",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuántos jugadores tiene un equipo de fútbol?",
+        "type": "multiple",
+        "options": ["9", "10", "11", "12"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿En qué deporte se usa una raqueta?",
+        "type": "multiple",
+        "options": ["Fútbol", "Básquetbol", "Tenis", "Natación"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿Las Olimpiadas se celebran cada 4 años?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Cuántos sets hay en un partido de tenis profesional masculino?",
+        "type": "multiple",
+        "options": ["3", "5", "7", "Depende"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿En qué país se inventó el baloncesto?",
+        "type": "multiple",
+        "options": ["Francia", "Inglaterra", "Estados Unidos", "Canadá"],
+        "correctAnswer": 2,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 73,
+      "totalCompletions": 69,
+      "averageScore": 88.4,
+      "averageRating": 4.5,
+      "totalRatings": 25
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-ciencias-02",
+    "title": "El Sistema Solar",
+    "description": "Explora nuestro sistema solar",
+    "category": "Ciencias",
+    "level": "Intermedio",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuántos planetas tiene el Sistema Solar?",
+        "type": "multiple",
+        "options": ["7", "8", "9", "10"],
+        "correctAnswer": 1,
+        "points": 10,
+        "explanation": "Desde 2006, el Sistema Solar tiene 8 planetas (Plutón fue reclasificado como planeta enano)."
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Cuál es el planeta más grande?",
+        "type": "multiple",
+        "options": ["Saturno", "Júpiter", "Urano", "Neptuno"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿La Tierra es el tercer planeta desde el Sol?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Qué planeta es conocido como el planeta rojo?",
+        "type": "multiple",
+        "options": ["Venus", "Marte", "Mercurio", "Júpiter"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuántas lunas tiene la Tierra?",
+        "type": "multiple",
+        "options": ["0", "1", "2", "3"],
+        "correctAnswer": 1,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 38,
+      "totalCompletions": 35,
+      "averageScore": 82.7,
+      "averageRating": 4.6,
+      "totalRatings": 14
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-arte-01",
+    "title": "Arte y Artistas Famosos",
+    "description": "Conoce a los grandes artistas de la historia",
+    "category": "Arte",
+    "level": "Intermedio",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Quién pintó 'La noche estrellada'?",
+        "type": "multiple",
+        "options": ["Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Salvador Dalí"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿En qué museo está la Mona Lisa?",
+        "type": "multiple",
+        "options": ["Museo del Prado", "Museo del Louvre", "British Museum", "MoMA"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿Picasso fue un pintor español?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿Qué movimiento artístico fundó Salvador Dalí?",
+        "type": "multiple",
+        "options": ["Impresionismo", "Cubismo", "Surrealismo", "Expresionismo"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Quién esculpió 'El David'?",
+        "type": "multiple",
+        "options": ["Donatello", "Miguel Ángel", "Bernini", "Rodin"],
+        "correctAnswer": 1,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 29,
+      "totalCompletions": 26,
+      "averageScore": 74.5,
+      "averageRating": 4.2,
+      "totalRatings": 11
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-cultura-01",
+    "title": "Cultura General Avanzada",
+    "description": "Un quiz desafiante de cultura general",
+    "category": "Cultura General",
+    "level": "Difícil",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "¿Cuál es el océano más grande del mundo?",
+        "type": "multiple",
+        "options": ["Atlántico", "Índico", "Pacífico", "Ártico"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Quién escribió 'Don Quijote de la Mancha'?",
+        "type": "multiple",
+        "options": ["Federico García Lorca", "Miguel de Cervantes", "Gabriel García Márquez", "Jorge Luis Borges"],
+        "correctAnswer": 1,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿El monte Everest es la montaña más alta del mundo?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "¿En qué continente se encuentra Egipto?",
+        "type": "multiple",
+        "options": ["Asia", "Europa", "África", "Medio Oriente"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuál es el idioma más hablado del mundo?",
+        "type": "multiple",
+        "options": ["Inglés", "Español", "Chino mandarín", "Hindi"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q6",
+        "question": "¿Cuántos huesos tiene el cuerpo humano adulto?",
+        "type": "multiple",
+        "options": ["186", "206", "226", "246"],
+        "correctAnswer": 1,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 21,
+      "totalCompletions": 18,
+      "averageScore": 68.3,
+      "averageRating": 4.8,
+      "totalRatings": 9
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  },
+  {
+    "quizId": "quiz-matematicas-02",
+    "title": "Álgebra Básica",
+    "description": "Resuelve problemas de álgebra",
+    "category": "Matemáticas",
+    "level": "Difícil",
+    "isPublic": true,
+    "questions": [
+      {
+        "questionId": "q1",
+        "question": "Si x + 5 = 12, ¿cuánto es x?",
+        "type": "multiple",
+        "options": ["5", "6", "7", "8"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q2",
+        "question": "¿Cuál es el resultado de 2² + 3²?",
+        "type": "multiple",
+        "options": ["10", "11", "12", "13"],
+        "correctAnswer": 3,
+        "points": 10
+      },
+      {
+        "questionId": "q3",
+        "question": "¿El número π (pi) es aproximadamente 3.14?",
+        "type": "boolean",
+        "options": ["Verdadero", "Falso"],
+        "correctAnswer": 0,
+        "points": 10
+      },
+      {
+        "questionId": "q4",
+        "question": "Si 3x = 15, ¿cuánto es x?",
+        "type": "multiple",
+        "options": ["3", "4", "5", "6"],
+        "correctAnswer": 2,
+        "points": 10
+      },
+      {
+        "questionId": "q5",
+        "question": "¿Cuánto es la raíz cuadrada de 64?",
+        "type": "multiple",
+        "options": ["6", "7", "8", "9"],
+        "correctAnswer": 2,
+        "points": 10
+      }
+    ],
+    "stats": {
+      "totalAttempts": 34,
+      "totalCompletions": 29,
+      "averageScore": 72.6,
+      "averageRating": 4.3,
+      "totalRatings": 13
+    },
+    "settings": {
+      "shuffleQuestions": false,
+      "shuffleOptions": true,
+      "showCorrectAnswers": true,
+      "allowRetake": true
+    }
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533427489714",
+    "project_id": "quizprolearning",
+    "storage_bucket": "quizprolearning.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533427489714:android:b2a4d56e0a96fe74a632ab",
+        "android_client_info": {
+          "package_name": "com.quizprolearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533427489714-k3l20va61dl8fbqffkf0cglmccits9nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBQ7XLV1bCw5VjAGFIDlo7G_KFCV9DeKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533427489714-k3l20va61dl8fbqffkf0cglmccits9nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

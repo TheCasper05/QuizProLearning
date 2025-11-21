@@ -1,0 +1,106 @@
+[
+  {
+    "categoryId": "ciencias",
+    "name": "Ciencias",
+    "emoji": "🔬",
+    "description": "Explora el mundo de la ciencia",
+    "color": "#B8E6B8",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 1
+  },
+  {
+    "categoryId": "matematicas",
+    "name": "Matemáticas",
+    "emoji": "🔢",
+    "description": "Pon a prueba tus habilidades matemáticas",
+    "color": "#A8D5FF",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 2
+  },
+  {
+    "categoryId": "historia",
+    "name": "Historia",
+    "emoji": "📚",
+    "description": "Aprende sobre el pasado",
+    "color": "#FFDAB9",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 3
+  },
+  {
+    "categoryId": "arte",
+    "name": "Arte",
+    "emoji": "🎨",
+    "description": "Descubre el mundo del arte",
+    "color": "#FFB6C1",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 4
+  },
+  {
+    "categoryId": "deportes",
+    "name": "Deportes",
+    "emoji": "⚽",
+    "description": "Todo sobre deportes",
+    "color": "#C7F0DB",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 5
+  },
+  {
+    "categoryId": "tecnologia",
+    "name": "Tecnología",
+    "emoji": "💻",
+    "description": "El futuro de la tecnología",
+    "color": "#9B9BE8",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 6
+  },
+  {
+    "categoryId": "geografia",
+    "name": "Geografía",
+    "emoji": "🌍",
+    "description": "Explora el mundo",
+    "color": "#A8E6CF",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 7
+  },
+  {
+    "categoryId": "cultura-general",
+    "name": "Cultura General",
+    "emoji": "🌟",
+    "description": "Un poco de todo",
+    "color": "#FFD666",
+    "stats": {
+      "totalQuizzes": 0,
+      "totalAttempts": 0
+    },
+    "isActive": true,
+    "order": 8
+  }
+]
