@@ -32,7 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   textStyle,
   icon,
 }) => {
-  const getButtonStyle = (): ViewStyle => {
+  const getButtonStyle = () => {
     const baseStyle = [styles.button, styles[`button_${size}`]];
 
     switch (variant) {
@@ -49,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
     }
   };
 
-  const getTextStyle = (): TextStyle => {
+  const getTextStyle = () => {
     const baseStyle = [styles.text, styles[`text_${size}`]];
 
     switch (variant) {
