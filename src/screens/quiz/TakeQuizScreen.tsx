@@ -249,12 +249,20 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.disabled,
   },
   finishButton: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: '#10B981', // Verde brillante
+    paddingVertical: 18,
+    paddingHorizontal: 35,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    elevation: 8,
   },
   finishButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    letterSpacing: 0.5,
   },
   errorText: {
     fontSize: 18,

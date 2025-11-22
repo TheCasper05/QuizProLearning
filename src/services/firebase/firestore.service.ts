@@ -26,7 +26,8 @@ export class FirestoreService {
     id: string,
     data: Partial<T>
   ): Promise<void> {
-    await firestore().collection(collection).doc(id).update(data);
+    // Usar set con merge:true para crear el documento si no existe
+    await firestore().collection(collection).doc(id).set(data, { merge: true });
   }
 
   // Eliminar documento

@@ -1,28 +1,51 @@
 import { FirestoreService } from '../firebase/firestore.service';
 import { COLLECTIONS } from '../firebase/config';
-import { Quiz, QuizCategory, QuizLevel } from '../../models/Quiz';
+import { Quiz, QuizLevel } from '../../models/Quiz';
+import { QuizCategory } from '../../models/Category';
 import firestore from '@react-native-firebase/firestore';
 
 export class QuizService {
+  // Helper para remover campos undefined
+  private static removeUndefinedFields(obj: any): any {
+    const cleaned: any = {};
+    Object.keys(obj).forEach(key => {
+      if (obj[key] !== undefined) {
+        if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+          cleaned[key] = this.removeUndefinedFields(obj[key]);
+        } else if (Array.isArray(obj[key])) {
+          cleaned[key] = obj[key].map((item: any) =>
+            typeof item === 'object' && item !== null ? this.removeUndefinedFields(item) : item
+          );
+        } else {
+          cleaned[key] = obj[key];
+        }
+      }
+    });
+    return cleaned;
+  }
+
   // Crear quiz
-  static async createQuiz(quiz: Omit<Quiz, 'id'>): Promise<Quiz> {
+  static async createQuiz(quiz: Omit<Quiz, 'quizId'>): Promise<Quiz> {
     const docRef = firestore().collection(COLLECTIONS.QUIZZES).doc();
-    const newQuiz: Quiz = {
+
+    // Crear objeto sin campos undefined
+    const cleanQuiz = this.removeUndefinedFields({
       ...quiz,
-      id: docRef.id,
+      quizId: docRef.id,
       createdAt: new Date(),
       updatedAt: new Date(),
       stats: {
         totalAttempts: 0,
+        totalCompletions: 0,
         averageScore: 0,
-        ratings: 0,
         averageRating: 0,
-        completionRate: 0,
+        totalRatings: 0,
       },
-    };
+    });
 
-    await FirestoreService.create(COLLECTIONS.QUIZZES, newQuiz.id, newQuiz);
-    return newQuiz;
+    await FirestoreService.create(COLLECTIONS.QUIZZES, docRef.id, cleanQuiz);
+
+    return cleanQuiz as Quiz;
   }
 
   // Obtener quiz por ID
@@ -95,17 +118,48 @@ export class QuizService {
     creatorId: string,
     includePrivate: boolean = false
   ): Promise<Quiz[]> {
-    const filters = [{ field: 'creatorId', operator: '==', value: creatorId }];
+    try {
+      // Intentar con índice compuesto (requiere índice en Firestore)
+      const filters = [{ field: 'createdBy.userId', operator: '==', value: creatorId }];
 
-    if (!includePrivate) {
-      filters.push({ field: 'isPublic', operator: '==', value: true });
+      if (!includePrivate) {
+        filters.push({ field: 'isPublic', operator: '==', value: true });
+      }
+
+      return await FirestoreService.query<Quiz>(
+        COLLECTIONS.QUIZZES,
+        filters as any,
+        { field: 'createdAt', direction: 'desc' }
+      );
+    } catch (error: any) {
+      // Si falla por falta de índice, usar consulta simple y ordenar localmente
+      if (error.code === 'firestore/failed-precondition') {
+        console.log('⚠️ Índice no encontrado, usando consulta simple y ordenando localmente');
+
+        // Consulta simple (no requiere índice compuesto)
+        const allUserQuizzes = await FirestoreService.query<Quiz>(
+          COLLECTIONS.QUIZZES,
+          [{ field: 'createdBy.userId', operator: '==', value: creatorId }]
+          // Sin orderBy para evitar necesitar índice
+        );
+
+        // Filtrar privados si es necesario
+        let filtered = allUserQuizzes;
+        if (!includePrivate) {
+          filtered = filtered.filter(q => q.isPublic);
+        }
+
+        // Ordenar por fecha localmente (más reciente primero)
+        return filtered.sort((a, b) => {
+          const dateA = a.createdAt?.toDate ? a.createdAt.toDate() : new Date(a.createdAt);
+          const dateB = b.createdAt?.toDate ? b.createdAt.toDate() : new Date(b.createdAt);
+          return dateB.getTime() - dateA.getTime();
+        });
+      }
+
+      // Si es otro error, lanzarlo
+      throw error;
     }
-
-    return FirestoreService.query<Quiz>(
-      COLLECTIONS.QUIZZES,
-      filters as any,
-      { field: 'createdAt', direction: 'desc' }
-    );
   }
 
   // Buscar quizzes

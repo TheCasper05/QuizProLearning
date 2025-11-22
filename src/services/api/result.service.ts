@@ -9,14 +9,21 @@ export class ResultService {
     result: Omit<QuizResult, 'id'>
   ): Promise<QuizResult> {
     const docRef = firestore().collection(COLLECTIONS.RESULTS).doc();
-    const newResult: QuizResult = {
+
+    // Convertir Date a Timestamp de Firestore
+    const resultData = {
       ...result,
       id: docRef.id,
-      completedAt: new Date(),
+      completedAt: firestore.Timestamp.now(),
     };
 
-    await FirestoreService.create(COLLECTIONS.RESULTS, newResult.id, newResult);
-    return newResult;
+    await FirestoreService.create(COLLECTIONS.RESULTS, docRef.id, resultData);
+
+    // Retornar con Date para compatibilidad con el modelo
+    return {
+      ...resultData,
+      completedAt: new Date(),
+    } as QuizResult;
   }
 
   // Obtener resultados de un usuario
