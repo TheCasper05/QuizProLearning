@@ -1,5 +1,6 @@
 export interface User {
   id: string;
+  uid?: string; // Alias for id (for Firebase compatibility)
   email: string;
   displayName: string;
   photoURL?: string;

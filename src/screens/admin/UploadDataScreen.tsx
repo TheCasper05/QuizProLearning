@@ -59,7 +59,7 @@ export const UploadDataScreen: React.FC = () => {
       setUploadResult(null);
 
       const result = await uploadAllDemoData(
-        user!.uid,
+        user!.id,
         user!.displayName || 'Usuario'
       );
 

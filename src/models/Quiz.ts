@@ -1,5 +1,8 @@
 import { QuizCategory } from './Category';
 
+// Re-export QuizCategory for convenience
+export { QuizCategory };
+
 export enum QuizLevel {
   BASIC = 'basic',
   INTERMEDIATE = 'intermediate',
@@ -46,6 +49,7 @@ export interface QuizCreator {
 }
 
 export interface Quiz {
+  id?: string; // Alias for quizId (for compatibility)
   quizId: string;
   title: string;
   description: string;

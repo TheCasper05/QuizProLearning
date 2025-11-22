@@ -19,6 +19,8 @@ export const LightColors = {
   errorLight: '#F87171',
   errorDark: '#DC2626',
 
+  accent: '#F59E0B',       // Amber/Orange accent
+
   info: '#3B82F6',         // Blue
   infoLight: '#60A5FA',
   infoDark: '#2563EB',
@@ -69,6 +71,8 @@ export const DarkColors = {
   error: '#F87171',
   errorLight: '#FCA5A5',
   errorDark: '#EF4444',
+
+  accent: '#FBBF24',       // Amber/Orange accent
 
   info: '#60A5FA',
   infoLight: '#93C5FD',
