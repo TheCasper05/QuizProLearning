@@ -27,25 +27,50 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('🔵 AuthContext: Iniciando suscripción a cambios de autenticación');
+
+    // Timeout de seguridad: si después de 10 segundos no hay respuesta, continuar
+    const timeoutId = setTimeout(() => {
+      console.log('⚠️ AuthContext: Timeout alcanzado, continuando sin autenticación');
+      setLoading(false);
+    }, 10000);
+
     // Escuchar cambios de autenticación
     const unsubscribe = auth().onAuthStateChanged(async (firebaseUser) => {
       try {
+        clearTimeout(timeoutId); // Cancelar timeout si recibimos respuesta
+
+        console.log('🔵 AuthContext: Estado de autenticación cambiado', {
+          isAuthenticated: !!firebaseUser,
+          uid: firebaseUser?.uid,
+        });
+
         if (firebaseUser) {
+          console.log('🔵 AuthContext: Usuario autenticado, obteniendo datos de Firestore...');
           // Obtener datos completos del usuario de Firestore
           const userData = await UserService.getUser(firebaseUser.uid);
+          console.log('✅ AuthContext: Datos de usuario obtenidos correctamente');
           setUser(userData);
         } else {
+          console.log('🔵 AuthContext: No hay usuario autenticado');
           setUser(null);
         }
       } catch (err: any) {
-        console.error('Error al obtener usuario:', err);
+        console.error('❌ AuthContext: Error al obtener usuario:', err);
+        console.error('❌ Stack trace:', err.stack);
         setError(err.message);
+        // Si hay error obteniendo datos de Firestore, aún así permitir continuar
+        setUser(null);
       } finally {
+        console.log('🔵 AuthContext: Finalizando carga');
         setLoading(false);
       }
     });
 
-    return unsubscribe;
+    return () => {
+      clearTimeout(timeoutId);
+      unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
