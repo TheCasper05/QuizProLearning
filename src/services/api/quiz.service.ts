@@ -60,10 +60,13 @@ export class QuizService {
     quizId: string,
     data: Partial<Quiz>
   ): Promise<void> {
-    await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, {
+    // Limpiar campos undefined antes de actualizar
+    const cleanData = this.removeUndefinedFields({
       ...data,
       updatedAt: new Date(),
     });
+
+    await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, cleanData);
   }
 
   // Eliminar quiz

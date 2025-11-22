@@ -61,6 +61,10 @@ const MyQuizzesScreen = ({ navigation }: any) => {
     navigation.navigate('CreateQuiz');
   };
 
+  const handleEditQuiz = (quizId: string) => {
+    navigation.navigate('EditQuiz', { quizId });
+  };
+
   const handleDeleteQuiz = async (quizId: string, quizTitle: string) => {
     Alert.alert(
       'Eliminar Quiz',
@@ -134,12 +138,20 @@ const MyQuizzesScreen = ({ navigation }: any) => {
           quiz={adaptedQuiz as any}
           onPress={() => handleQuizPress(item.quizId)}
         />
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => handleDeleteQuiz(item.quizId, item.title)}
-        >
-          <Icon name="delete" size={24} color={LightColors.error} style={{ marginLeft: 10 }} />
-        </TouchableOpacity>
+        <View style={styles.actionButtons}>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => handleEditQuiz(item.quizId)}
+          >
+            <Icon name="pencil" size={22} color={LightColors.primary} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => handleDeleteQuiz(item.quizId, item.title)}
+          >
+            <Icon name="delete" size={22} color={LightColors.error} />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -243,13 +255,18 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 16,
   },
-  deleteButton: {
+  actionButtons: {
     position: 'absolute',
     top: 12,
     left: 12,
+    flexDirection: 'row',
+    gap: 8,
+    zIndex: 10,
+  },
+  editButton: {
     backgroundColor: LightColors.white,
-    width: 35,
-    height: 35,
+    width: 40,
+    height: 40,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -258,7 +275,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    zIndex: 10,
+  },
+  deleteButton: {
+    backgroundColor: LightColors.white,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: LightColors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   emptyContainer: {
     flex: 1,

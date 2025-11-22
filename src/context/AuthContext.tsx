@@ -13,7 +13,7 @@ interface AuthContextType {
   register: (email: string, password: string, displayName: string) => Promise<void>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
-  updateProfile: (displayName?: string, photoURL?: string) => Promise<void>;
+  updateProfile: (displayName?: string, photoURL?: string | null) => Promise<void>;
   clearError: () => void;
 }
 
@@ -150,7 +150,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const updateProfile = async (displayName?: string, photoURL?: string) => {
+  const updateProfile = async (displayName?: string, photoURL?: string | null) => {
     try {
       setLoading(true);
       setError(null);

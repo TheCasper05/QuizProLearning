@@ -1,4 +1,5 @@
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { User } from '../../models/User';
 import { UserService } from '../api/user.service';
@@ -68,7 +69,12 @@ export class AuthService {
       await GoogleSignin.hasPlayServices();
 
       // Obtener el token de ID del usuario
-      const { idToken } = await GoogleSignin.signIn();
+      const signInResult = await GoogleSignin.signIn();
+      const idToken = signInResult.data?.idToken;
+
+      if (!idToken) {
+        throw new Error('No se pudo obtener el token de Google');
+      }
 
       // Crear credencial de Google
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
@@ -117,17 +123,27 @@ export class AuthService {
 
   // Cerrar sesión
   static async logout(): Promise<void> {
+    // Intentar cerrar sesión de Google si está conectado
     try {
-      // Cerrar sesión de Google si está conectado
-      const isSignedIn = await GoogleSignin.isSignedIn();
-      if (isSignedIn) {
-        await GoogleSignin.signOut();
-      }
+      await GoogleSignin.signOut();
+      console.log('✅ Google SignOut exitoso');
+    } catch (googleError) {
+      // Si falla el signOut de Google, continuar con Firebase
+      console.log('⚠️ Google SignOut error (puede ser normal si no está conectado):', googleError);
+    }
 
-      // Cerrar sesión de Firebase
+    // Cerrar sesión de Firebase
+    try {
       await auth().signOut();
-    } catch (error: any) {
-      throw new Error('Error al cerrar sesión');
+      console.log('✅ Firebase SignOut exitoso');
+    } catch (firebaseError: any) {
+      // Si el error es que no hay usuario, lo ignoramos porque el objetivo ya se cumplió
+      if (firebaseError.code === 'auth/no-current-user') {
+        console.log('⚠️ No había usuario en Firebase (ya cerrado)');
+      } else {
+        console.error('❌ Error en Firebase SignOut:', firebaseError);
+        throw firebaseError;
+      }
     }
   }
 
@@ -155,24 +171,50 @@ export class AuthService {
   // Actualizar perfil
   static async updateProfile(
     displayName?: string,
-    photoURL?: string
+    photoURL?: string | null
   ): Promise<void> {
     const user = auth().currentUser;
     if (!user) throw new Error('No hay usuario autenticado');
 
     try {
-      await user.updateProfile({
-        displayName: displayName || user.displayName,
-        photoURL: photoURL || user.photoURL,
+      // Determinar valores a actualizar
+      const newDisplayName = displayName !== undefined ? displayName : user.displayName;
+      const newPhotoURL = photoURL !== undefined ? photoURL : user.photoURL;
+
+      console.log('🔵 Actualizando perfil de Firebase Auth...', {
+        displayName: newDisplayName,
+        photoURL: newPhotoURL,
       });
 
-      // Actualizar en Firestore
-      await UserService.updateUser(user.uid, {
-        displayName: displayName || user.displayName || 'Usuario',
-        photoURL: photoURL || user.photoURL || undefined,
+      await user.updateProfile({
+        displayName: newDisplayName,
+        photoURL: newPhotoURL,
       });
-    } catch (error) {
-      throw new Error('Error al actualizar perfil');
+
+      console.log('✅ Firebase Auth actualizado');
+      console.log('🔵 Actualizando Firestore...');
+
+      // Construir objeto de actualización
+      const firestoreUpdate: any = {
+        displayName: newDisplayName || 'Usuario',
+      };
+
+      // Manejar photoURL: si es null, eliminarlo; si tiene valor, actualizarlo
+      if (newPhotoURL === null) {
+        // Eliminar el campo de Firestore
+        firestoreUpdate.photoURL = firestore.FieldValue.delete();
+      } else if (newPhotoURL) {
+        // Actualizar con el nuevo valor
+        firestoreUpdate.photoURL = newPhotoURL;
+      }
+      // Si newPhotoURL es undefined, no se incluye (no se modifica)
+
+      await UserService.updateUser(user.uid, firestoreUpdate);
+
+      console.log('✅ Firestore actualizado');
+    } catch (error: any) {
+      console.error('❌ Error en updateProfile:', error);
+      throw error; // Re-lanzar el error original en lugar de uno genérico
     }
   }
 
