@@ -123,7 +123,7 @@ export class QuizService {
   ): Promise<Quiz[]> {
     try {
       // Intentar con índice compuesto (requiere índice en Firestore)
-      const filters = [{ field: 'createdBy.userId', operator: '==', value: creatorId }];
+      const filters: any[] = [{ field: 'createdBy.userId', operator: '==', value: creatorId }];
 
       if (!includePrivate) {
         filters.push({ field: 'isPublic', operator: '==', value: true });
@@ -131,7 +131,7 @@ export class QuizService {
 
       return await FirestoreService.query<Quiz>(
         COLLECTIONS.QUIZZES,
-        filters as any,
+        filters,
         { field: 'createdAt', direction: 'desc' }
       );
     } catch (error: any) {
@@ -199,7 +199,7 @@ export class QuizService {
   static async incrementAttempts(quizId: string): Promise<void> {
     const quiz = await this.getQuiz(quizId);
     await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, {
-      'stats.totalAttempts': quiz.stats.totalAttempts + 1,
+      'stats.totalAttempts': (quiz.stats?.totalAttempts || 0) + 1,
     });
   }
 
@@ -209,13 +209,70 @@ export class QuizService {
     newScore: number
   ): Promise<void> {
     const quiz = await this.getQuiz(quizId);
-    const totalAttempts = quiz.stats.totalAttempts;
-    const currentAverage = quiz.stats.averageScore;
+    const totalCompletions = (quiz.stats?.totalCompletions || 0) + 1;
+    const currentAverage = quiz.stats?.averageScore || 0;
     const newAverage =
-      (currentAverage * totalAttempts + newScore) / (totalAttempts + 1);
+      (currentAverage * (totalCompletions - 1) + newScore) / totalCompletions;
 
     await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, {
       'stats.averageScore': newAverage,
+      'stats.totalCompletions': totalCompletions,
     });
+  }
+
+  // Actualizar estadísticas del quiz cuando se completa
+  static async updateQuizStatsOnCompletion(
+    quizId: string,
+    scorePercentage: number,
+    rating?: number
+  ): Promise<void> {
+    try {
+      console.log('🔵 Actualizando estadísticas del quiz:', {
+        quizId,
+        score: scorePercentage,
+        rating,
+      });
+
+      const quiz = await this.getQuiz(quizId);
+
+      // Incrementar intentos y completados
+      const totalAttempts = (quiz.stats?.totalAttempts || 0) + 1;
+      const totalCompletions = (quiz.stats?.totalCompletions || 0) + 1;
+
+      // Calcular nuevo promedio de score
+      const currentAvgScore = quiz.stats?.averageScore || 0;
+      const newAvgScore =
+        (currentAvgScore * (totalCompletions - 1) + scorePercentage) /
+        totalCompletions;
+
+      // Preparar actualización
+      const statsUpdate: any = {
+        'stats.totalAttempts': totalAttempts,
+        'stats.totalCompletions': totalCompletions,
+        'stats.averageScore': Math.round(newAvgScore * 100) / 100, // 2 decimales
+      };
+
+      // Si hay rating, actualizar promedio de rating
+      if (rating !== undefined && rating > 0) {
+        const currentAvgRating = quiz.stats?.averageRating || 0;
+        const totalRatings = (quiz.stats?.totalRatings || 0) + 1;
+        const newAvgRating =
+          (currentAvgRating * (totalRatings - 1) + rating) / totalRatings;
+
+        statsUpdate['stats.averageRating'] = Math.round(newAvgRating * 100) / 100;
+        statsUpdate['stats.totalRatings'] = totalRatings;
+      }
+
+      await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, statsUpdate);
+
+      console.log('✅ Estadísticas del quiz actualizadas:', {
+        totalAttempts,
+        totalCompletions,
+        averageScore: statsUpdate['stats.averageScore'],
+      });
+    } catch (error: any) {
+      console.error('❌ Error al actualizar estadísticas del quiz:', error);
+      throw error;
+    }
   }
 }

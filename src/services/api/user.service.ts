@@ -5,18 +5,42 @@ import { User } from '../../models/User';
 export class UserService {
   // Crear usuario
   static async createUser(user: User): Promise<User> {
-    await FirestoreService.create(COLLECTIONS.USERS, user.id, {
-      ...user,
-      createdAt: new Date(),
-    });
-    return user;
+    try {
+      console.log('🔵 UserService.createUser - Iniciando creación:', user.id);
+
+      const userData = {
+        ...user,
+        createdAt: new Date(),
+      };
+
+      await FirestoreService.create(COLLECTIONS.USERS, user.id, userData);
+      console.log('✅ UserService.createUser - Usuario creado exitosamente');
+
+      return user;
+    } catch (error: any) {
+      console.error('❌ UserService.createUser - Error:', error);
+      throw error;
+    }
   }
 
   // Obtener usuario
   static async getUser(userId: string): Promise<User> {
-    const user = await FirestoreService.get<User>(COLLECTIONS.USERS, userId);
-    if (!user) throw new Error('Usuario no encontrado');
-    return user;
+    try {
+      console.log('🔵 UserService.getUser - Obteniendo usuario:', userId);
+
+      const user = await FirestoreService.get<User>(COLLECTIONS.USERS, userId);
+
+      if (!user) {
+        console.error('❌ UserService.getUser - Usuario no encontrado:', userId);
+        throw new Error('Usuario no encontrado');
+      }
+
+      console.log('✅ UserService.getUser - Usuario obtenido:', user.displayName);
+      return user;
+    } catch (error: any) {
+      console.error('❌ UserService.getUser - Error:', error);
+      throw error;
+    }
   }
 
   // Actualizar usuario

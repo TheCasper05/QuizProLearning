@@ -12,6 +12,7 @@ import { Quiz, Question } from '../../models/Quiz';
 import { QuizResult } from '../../models/Result';
 import { ResultService } from '../../services/api/result.service';
 import { UserService } from '../../services/api/user.service';
+import { QuizService } from '../../services/api/quiz.service';
 import { Loading } from '../../components/common';
 import { theme } from '../../styles/theme';
 import { useAuth } from '../../context/AuthContext';
@@ -138,6 +139,14 @@ export const QuizResultScreen: React.FC<QuizResultScreenProps> = ({
         await UserService.updateTotalScore(user.id, resultData.score);
         console.log('✅ TotalScore actualizado');
       }
+
+      // Actualizar estadísticas del quiz
+      console.log('🔵 Actualizando estadísticas del quiz...');
+      await QuizService.updateQuizStatsOnCompletion(
+        resultData.quizId,
+        resultData.score
+      );
+      console.log('✅ Estadísticas del quiz actualizadas');
 
       console.log('✅ Guardado completo exitoso');
     } catch (error: any) {

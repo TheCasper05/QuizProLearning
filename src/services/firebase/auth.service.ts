@@ -17,20 +17,24 @@ export class AuthService {
     displayName: string
   ): Promise<User> {
     try {
+      console.log('🔵 Iniciando registro de usuario:', email);
+
       const userCredential = await auth().createUserWithEmailAndPassword(
         email,
         password
       );
 
+      console.log('✅ Usuario creado en Firebase Auth:', userCredential.user.uid);
+
       // Actualizar perfil
       await userCredential.user.updateProfile({ displayName });
+      console.log('✅ Perfil actualizado en Firebase Auth');
 
       // Crear documento de usuario en Firestore
-      const user = await UserService.createUser({
+      const userData: any = {
         id: userCredential.user.uid,
         email: userCredential.user.email!,
         displayName,
-        photoURL: userCredential.user.photoURL || undefined,
         createdAt: new Date(),
         stats: {
           quizzesCreated: 0,
@@ -39,11 +43,23 @@ export class AuthService {
           level: 1,
           achievements: [],
         },
-      });
+      };
+
+      // Solo agregar photoURL si existe
+      if (userCredential.user.photoURL) {
+        userData.photoURL = userCredential.user.photoURL;
+      }
+
+      console.log('🔵 Creando documento en Firestore:', userData);
+      const user = await UserService.createUser(userData);
+      console.log('✅ Usuario creado en Firestore');
 
       return user;
     } catch (error: any) {
-      throw new Error(this.getAuthErrorMessage(error.code));
+      console.error('❌ Error en registerWithEmail:', error);
+      console.error('❌ Error code:', error.code);
+      console.error('❌ Error message:', error.message);
+      throw new Error(this.getAuthErrorMessage(error.code) || error.message);
     }
   }
 
