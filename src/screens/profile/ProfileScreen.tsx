@@ -171,7 +171,7 @@ const ProfileScreen = ({ navigation }: any) => {
 
           {/* Información */}
           <View style={styles.userInfo}>
-            <Text style={styles.displayName}>{userData.displayName}</Text>
+            <Text style={styles.displayName}>{userData.displayName || 'Usuario'}</Text>
             <Text style={styles.email}>{userData.email}</Text>
           </View>
         </View>
