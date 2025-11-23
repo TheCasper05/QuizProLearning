@@ -235,40 +235,52 @@ export class QuizService {
 
       const quiz = await this.getQuiz(quizId);
 
+      // Obtener stats actuales o inicializar
+      const currentStats = quiz.stats || {
+        totalAttempts: 0,
+        totalCompletions: 0,
+        averageScore: 0,
+        averageRating: 0,
+        totalRatings: 0,
+      };
+
       // Incrementar intentos y completados
-      const totalAttempts = (quiz.stats?.totalAttempts || 0) + 1;
-      const totalCompletions = (quiz.stats?.totalCompletions || 0) + 1;
+      const totalAttempts = currentStats.totalAttempts + 1;
+      const totalCompletions = currentStats.totalCompletions + 1;
 
       // Calcular nuevo promedio de score
-      const currentAvgScore = quiz.stats?.averageScore || 0;
+      const currentAvgScore = currentStats.averageScore;
       const newAvgScore =
         (currentAvgScore * (totalCompletions - 1) + scorePercentage) /
         totalCompletions;
 
-      // Preparar actualización
-      const statsUpdate: any = {
-        'stats.totalAttempts': totalAttempts,
-        'stats.totalCompletions': totalCompletions,
-        'stats.averageScore': Math.round(newAvgScore * 100) / 100, // 2 decimales
+      // Preparar nuevo objeto stats completo
+      const newStats = {
+        totalAttempts,
+        totalCompletions,
+        averageScore: Math.round(newAvgScore * 100) / 100, // 2 decimales
+        averageRating: currentStats.averageRating,
+        totalRatings: currentStats.totalRatings,
       };
 
       // Si hay rating, actualizar promedio de rating
       if (rating !== undefined && rating > 0) {
-        const currentAvgRating = quiz.stats?.averageRating || 0;
-        const totalRatings = (quiz.stats?.totalRatings || 0) + 1;
+        const currentAvgRating = currentStats.averageRating;
+        const totalRatings = currentStats.totalRatings + 1;
         const newAvgRating =
           (currentAvgRating * (totalRatings - 1) + rating) / totalRatings;
 
-        statsUpdate['stats.averageRating'] = Math.round(newAvgRating * 100) / 100;
-        statsUpdate['stats.totalRatings'] = totalRatings;
+        newStats.averageRating = Math.round(newAvgRating * 100) / 100;
+        newStats.totalRatings = totalRatings;
       }
 
-      await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, statsUpdate);
+      // Actualizar el objeto stats completo (no dot-notation)
+      await FirestoreService.update(COLLECTIONS.QUIZZES, quizId, { stats: newStats });
 
       console.log('✅ Estadísticas del quiz actualizadas:', {
-        totalAttempts,
-        totalCompletions,
-        averageScore: statsUpdate['stats.averageScore'],
+        totalAttempts: newStats.totalAttempts,
+        totalCompletions: newStats.totalCompletions,
+        averageScore: newStats.averageScore,
       });
     } catch (error: any) {
       console.error('❌ Error al actualizar estadísticas del quiz:', error);
