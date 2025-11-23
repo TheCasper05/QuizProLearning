@@ -34,6 +34,16 @@ const HistoryScreen = ({ navigation }: any) => {
       setResults(userResults);
     } catch (error: any) {
       console.error('❌ Error al cargar historial:', error);
+
+      // Si el error es por falta de índice, mostrar array vacío
+      if (error.code === 'firestore/failed-precondition') {
+        console.log('⚠️ Índice no encontrado en Firestore, mostrando historial vacío');
+        setResults([]);
+      } else {
+        // Para otros errores, también mostrar vacío pero loggear
+        console.error('❌ Error desconocido:', error.message);
+        setResults([]);
+      }
     } finally {
       setLoading(false);
     }

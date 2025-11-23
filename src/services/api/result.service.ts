@@ -28,11 +28,34 @@ export class ResultService {
 
   // Obtener resultados de un usuario
   static async getUserResults(userId: string): Promise<QuizResult[]> {
-    return FirestoreService.query<QuizResult>(
-      COLLECTIONS.RESULTS,
-      [{ field: 'userId', operator: '==', value: userId }],
-      { field: 'completedAt', direction: 'desc' }
-    );
+    try {
+      return await FirestoreService.query<QuizResult>(
+        COLLECTIONS.RESULTS,
+        [{ field: 'userId', operator: '==', value: userId }],
+        { field: 'completedAt', direction: 'desc' }
+      );
+    } catch (error: any) {
+      // Si falla por falta de índice, intentar sin ordenamiento
+      if (error.code === 'firestore/failed-precondition') {
+        console.log('⚠️ Índice no encontrado, obteniendo resultados sin ordenar');
+
+        const results = await FirestoreService.query<QuizResult>(
+          COLLECTIONS.RESULTS,
+          [{ field: 'userId', operator: '==', value: userId }]
+          // Sin orderBy
+        );
+
+        // Ordenar localmente por completedAt
+        return results.sort((a, b) => {
+          const dateA = (a.completedAt as any)?.toDate ? (a.completedAt as any).toDate() : new Date(a.completedAt);
+          const dateB = (b.completedAt as any)?.toDate ? (b.completedAt as any).toDate() : new Date(b.completedAt);
+          return dateB.getTime() - dateA.getTime(); // Más reciente primero
+        });
+      }
+
+      // Si es otro error, lanzarlo
+      throw error;
+    }
   }
 
   // Obtener resultados de un quiz específico
