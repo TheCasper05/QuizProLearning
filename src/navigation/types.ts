@@ -45,5 +45,6 @@ export type ProfileStackParamList = {
   ProfileMain: undefined;
   Settings: undefined;
   EditProfile: undefined;
+  History: undefined;
   Statistics: undefined;
 };

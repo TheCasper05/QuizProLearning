@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import EditProfileScreen from '../screens/profile/EditProfileScreen';
+import HistoryScreen from '../screens/profile/HistoryScreen';
 import SettingsScreen from '../screens/profile/SettingsScreen';
 
 const Stack = createStackNavigator<ProfileStackParamList>();
@@ -33,6 +34,11 @@ export const ProfileNavigator = () => {
         name="EditProfile"
         component={EditProfileScreen}
         options={{ title: 'Editar Perfil' }}
+      />
+      <Stack.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{ title: 'Mi Historial' }}
       />
       <Stack.Screen
         name="Settings"

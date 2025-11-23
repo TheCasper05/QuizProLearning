@@ -251,6 +251,26 @@ const ProfileScreen = ({ navigation }: any) => {
         />
       </View>
 
+      {/* Botón Ver Historial */}
+      <View style={styles.section}>
+        <TouchableOpacity
+          style={styles.historyButton}
+          onPress={() => navigation.navigate('History')}
+          activeOpacity={0.8}
+        >
+          <View style={styles.historyButtonContent}>
+            <Icon name="history" size={24} color={LightColors.primary} />
+            <View style={styles.historyButtonTextContainer}>
+              <Text style={styles.historyButtonTitle}>Ver Mi Historial</Text>
+              <Text style={styles.historyButtonSubtitle}>
+                {stats.quizzesTaken} {stats.quizzesTaken === 1 ? 'quiz completado' : 'quizzes completados'}
+              </Text>
+            </View>
+          </View>
+          <Icon name="chevron-right" size={24} color={LightColors.textSecondary} />
+        </TouchableOpacity>
+      </View>
+
       {/* Logros */}
       {stats.achievements && stats.achievements.length > 0 && (
         <View style={styles.section}>
@@ -448,6 +468,40 @@ const styles = StyleSheet.create({
     color: LightColors.text,
     marginTop: 8,
     textAlign: 'center',
+  },
+  historyButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: LightColors.white,
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: LightColors.border,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  historyButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  historyButtonTextContainer: {
+    marginLeft: 12,
+    flex: 1,
+  },
+  historyButtonTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: LightColors.text,
+    marginBottom: 2,
+  },
+  historyButtonSubtitle: {
+    fontSize: 13,
+    color: LightColors.textSecondary,
   },
   logoutButton: {
     flexDirection: 'row',
