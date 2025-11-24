@@ -818,9 +818,9 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
-Desarrollado por Jean Martinez
+Desarrollado por Jean Marthé, Oscar Gil, Juan Palacios
 
 ---
 
